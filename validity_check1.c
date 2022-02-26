@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 23:03:11 by areggie           #+#    #+#             */
-/*   Updated: 2022/02/23 23:10:06 by areggie          ###   ########.fr       */
+/*   Updated: 2022/02/26 17:48:27 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	input_validity_check(char **av, t_toolbox *tools, int argc)
 
 	i = 0;
 	if (argc < 2)
-		return (0);
+		return (1);
 	while (i < tools->argv_num + 1)
 	{
 		if (!input_numbers_signs_check(av, tools))

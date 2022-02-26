@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:17:21 by areggie           #+#    #+#             */
-/*   Updated: 2022/02/25 18:54:52 by areggie          ###   ########.fr       */
+/*   Updated: 2022/02/26 23:24:35 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ void	swapping(t_toolbox *tools, t_metaljacket *metaljacket);
 void	pushing( t_metaljacket *put_in, t_metaljacket *put_out);
 void	rev_rotate(t_metaljacket *metjacket);
 void	sa(t_toolbox *tools);
+void	sb(t_toolbox *tools);
+void	ss(t_toolbox *tools);
 void	pb(t_toolbox *tools);
 void	pa(t_toolbox *tools);
 void 	rra(t_toolbox *tools);
+void	rr(t_toolbox *tools);
+void	rrr(t_toolbox *tools);
 void 	ra(t_toolbox *tools);
 void 	rb(t_toolbox *tools);
 void 	rrb(t_toolbox *tools);
@@ -65,6 +69,10 @@ void	sort4(t_toolbox *tools);
 void	sort5_(t_toolbox *tools);
 int		compare_before_after_median(t_metaljacket mj, int median);
 void	sortmore(t_toolbox *tools);
+int		check_command(t_toolbox *vars, char *line);
+void	init_stack_b_len(t_toolbox *tools);
+void	init_stack_a_len(t_toolbox *tools);
+int		check_sorted_or_not(t_toolbox *tools);
 
 //FOR DEBUG
 void	debug_rotating(t_toolbox *tools);

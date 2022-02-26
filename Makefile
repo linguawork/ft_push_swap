@@ -1,49 +1,66 @@
-NAME		= 	push_swap
+PUSH_SWAP	= push_swap
+CHECKER		= checker
 
-SRCS		=  	main.c validity_check1.c validity_check2.c	\
-				cmd_push.c cmd_rotate.c cmd_swap.c 			\
-				cmd_rev_rotate.c debug.c sort1.c 			\
-				sort2.c sort5moreops.c sortmore.c					\
+
+
+PS_SRCS = 	main.c validity_check1.c validity_check2.c	\
+			cmd_push.c cmd_rotate.c cmd_swap.c 			\
+			cmd_rev_rotate.c debug.c sort1.c 			\
+			sort2.c sort5moreops.c sortmore.c					
+PS_OBJS = $(PS_SRCS:.c=.o)
+
 
 LIBFT		=	libft/
 
-#BONUS_SRCS	= 	ft_split.c 		\
 
-INCLUDES	=	./*.h \
-				
+INCLUDES	=	./*.h 
 
-OBJS		= 	${SRCS:.c=.o}
 
-BONUS_OBJS	= 	${BONUS_SRCS:.c=.o}
+C_SRCS	= checker.c validity_check1.c validity_check2.c	\
+			cmd_push.c cmd_rotate.c cmd_swap.c 			\
+			cmd_rev_rotate.c debug.c sort1.c 			\
+			sort2.c sort5moreops.c sortmore.c		
+C_OBJS = $(C_SRCS:.c=.o)
 
-CC			= 	gcc 
-RM			= 	rm -rf
+PS_HEADER		= push_swap.h
 
-CFLAGS		=  -g -Wall -Werror -Wextra -MMD #-fsanitize=address
 
-#.c.o:
-%.o: %.c #./push_swap.h ./libft/libft.h
-				${CC} ${CFLAGS} -I ${INCLUDES} -c $< -o ${<:.c=.o}
+CC = gcc
 
-${NAME}:		${OBJS}
-				@make -C ${LIBFT}
-				gcc -o $(NAME) $(OBJS) $(LIBFT)/libft.a
+RM = rm -rf
 
-${LIBFT}:		make -C $(LIBFT)
+CFLAGS = -MMD -Wall -Wextra -Werror -g
 
-all:			${NAME}
+%.o:%.c	#$(PS_HEADER) 
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-bonus:			${BONUS_OBJS}
-				gcc -o ${NAME} $(BONUS_OBJS)
+# ${LIBFT}:		make -C $(LIBFT)
 
-clean:			
-				${RM} ${OBJS} $(BONUS_OBJS) *.d
-				make clean -C $(LIBFT) 
+all: $(PUSH_SWAP)
 
-fclean:			clean 
-				${RM} ${NAME}  
-				make clean -C ${LIBFT} fclean
+$(PUSH_SWAP) : $(PS_OBJS)
+	make -C ${LIBFT}
+	$(CC) $(CFLAGS) $(LIBFT)/libft.a $(PS_OBJS) -o $(PUSH_SWAP) 
+	@echo "push_swap is done"
 
-re:				fclean all
+bonus: $(CHECKER)
 
-.PHONY:			all clean fclean re
+$(CHECKER) : $(C_OBJS)
+	@make -C ${LIBFT}
+	$(CC) $(CFLAGS) $(LIBFT)/libft.a $(C_OBJS) -o $(CHECKER) 
+	@echo "checker is done"
+
+
+clean:
+		@$(RM) $(PS_OBJS) $(C_OBJS) *.d
+		make clean -C $(LIBFT) 
+		@echo "clean is done"
+
+fclean: clean
+		@$(RM) $(PUSH_SWAP) $(CHECKER)
+		make clean -C ${LIBFT} fclean
+		@echo "fclean is done"
+
+re: fclean all
+
+.PHONY : all clean fclean re bonus
