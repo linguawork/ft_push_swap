@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:17:21 by areggie           #+#    #+#             */
-/*   Updated: 2022/02/26 23:24:35 by areggie          ###   ########.fr       */
+/*   Updated: 2022/02/27 21:09:21 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@
 typedef struct s_bullet{
 	int				bullet_index;
 	int				bullet_value;
-}					t_bullet; // у патрона есть индекс и цифров значение
+}					t_bullet;
 
 typedef struct s_metaljacket{
 	int				jacketlength;
-	t_bullet		*metaljacket;// магазин (массив) патронов  (с ячейками-патронами)
+	t_bullet		*metaljacket;
 }					t_metaljacket;
 
 typedef struct s_toolbox{
-	int				argv_num;//число аргументов без бинарника - argc
-	t_metaljacket	a;//тип магазина
+	int				argv_num;
+	t_metaljacket	a;
 	t_metaljacket	b;
 	int				*array_for_sorting;
 }					t_toolbox;
@@ -55,14 +55,14 @@ void	sb(t_toolbox *tools);
 void	ss(t_toolbox *tools);
 void	pb(t_toolbox *tools);
 void	pa(t_toolbox *tools);
-void 	rra(t_toolbox *tools);
+void	rra(t_toolbox *tools);
 void	rr(t_toolbox *tools);
 void	rrr(t_toolbox *tools);
-void 	ra(t_toolbox *tools);
-void 	rb(t_toolbox *tools);
-void 	rrb(t_toolbox *tools);
+void	ra(t_toolbox *tools);
+void	rb(t_toolbox *tools);
+void	rrb(t_toolbox *tools);
 void	sort2(t_toolbox *tools);
-void 	sort3(t_toolbox *tools);
+void	sort3(t_toolbox *tools);
 int		min_value_to_top4(t_toolbox *tools);
 int		min_value_to_top5(t_toolbox *tools);
 void	sort4(t_toolbox *tools);
@@ -74,12 +74,10 @@ void	init_stack_b_len(t_toolbox *tools);
 void	init_stack_a_len(t_toolbox *tools);
 int		check_sorted_or_not(t_toolbox *tools);
 
-//FOR DEBUG
 void	debug_rotating(t_toolbox *tools);
 void	debug_pushing(t_toolbox *tools);
 void	debug_swapping(t_toolbox *tools);
 void	debug_rev_rotating(t_toolbox *tools);
 void	printing_array( t_metaljacket *arr);
-
 
 #endif
