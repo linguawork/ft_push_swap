@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 21:49:31 by areggie           #+#    #+#             */
-/*   Updated: 2022/02/26 23:31:35 by areggie          ###   ########.fr       */
+/*   Updated: 2022/02/27 19:08:35 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int check_sorted_or_not(t_toolbox *tools)
 	i = 0;
 	while(i != tools->argv_num - 1) // - 1 чтобы в конце смотреть на последний элемент массива и на за массив
 	{
-		if (!(tools->array_for_sorting[i] < tools->array_for_sorting[i + 1]))
+		if (tools->a.metaljacket[i].bullet_value > tools->a.metaljacket[i + 1].bullet_value)
 				return (0);
 		i++;
 	}
@@ -36,27 +36,28 @@ void init_stack_b_len(t_toolbox *tools)
 
 int	check_command(t_toolbox *vars, char *line)
 {
-	if (!(ft_strcmp(line, "sa\n")))
+	// write (1, "here\n", 5);
+	if (!(ft_strcmp(line, "sa")))
 		sa(vars);
-	else if (!(ft_strcmp(line, "sb\n")))
+	else if (!(ft_strcmp(line, "sb")))
 		sb(vars);
-	else if (!(ft_strcmp(line, "ss\n")))
+	else if (!(ft_strcmp(line, "ss")))
 		ss(vars);
-	else if (!(ft_strcmp(line, "pa\n")))
+	else if (!(ft_strcmp(line, "pa")))
 		pa(vars);
-	else if (!(ft_strcmp(line, "pb\n")))
+	else if (!(ft_strcmp(line, "pb")))
 		pb(vars);
-	else if (!(ft_strcmp(line, "ra\n")))
+	else if (!(ft_strcmp(line, "ra")))
 		ra(vars);
-	else if (!(ft_strcmp(line, "rb\n")))
+	else if (!(ft_strcmp(line, "rb")))
 		rb(vars);
-	else if (!(ft_strcmp(line, "rr\n")))
+	else if (!(ft_strcmp(line, "rr")))
 		rr(vars);
-	else if (!(ft_strcmp(line, "rra\n")))
+	else if (!(ft_strcmp(line, "rra")))
 		rra(vars);
-	else if (!(ft_strcmp(line, "rrb\n")))
+	else if (!(ft_strcmp(line, "rrb")))
 		rrb(vars);
-	else if (!(ft_strcmp(line, "rrr\n")))
+	else if (!(ft_strcmp(line, "rrr")))
 		rrr(vars);
 	else
 		return (0);
@@ -80,7 +81,10 @@ void	run_reader(t_toolbox *vars)
 		}
 		free(line);
 	}
-	if (check_sorted_or_not(vars) && vars->b.jacketlength == 0)
+
+	// int i = check_sorted_or_not(vars);
+	// printf("%d\n", i);
+	if (check_sorted_or_not(vars) && vars->b.jacketlength == 0) // if not zero (1 -sorted)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
@@ -93,7 +97,16 @@ int	main(int argc, char **argv)
 	tools->argv_num = argv_counter(argv) - 1; // число argv не считая argc (наименование бинарника)
 	validate_a_and_charge_metaljacket(argc, argv, tools);
 	init_stack_b_len(tools);// маллок б
+	if (argc == 1)
+		return (0);
+	// if (check_sorted_or_not(tools)) // if not zero (1 -sorted)
+	// 	return(0);
+		
+	printing_array(&tools->a);// final print
+	printing_array(&tools->b);// final print
 	run_reader(tools);
+	printing_array(&tools->a);// final print
+	printing_array(&tools->b);// final print
 
 	exit(EXIT_SUCCESS);
 }
