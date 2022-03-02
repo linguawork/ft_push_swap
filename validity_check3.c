@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   validity_check3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/27 21:06:48 by areggie           #+#    #+#             */
-/*   Updated: 2022/03/02 12:50:32 by areggie          ###   ########.fr       */
+/*   Created: 2022/03/02 12:51:02 by areggie           #+#    #+#             */
+/*   Updated: 2022/03/02 12:51:30 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_sorted_or_not(t_toolbox *tools)
+void	init_stack_a_len(t_toolbox *tools)
 {
-	int	i;
-
-	i = 0;
-	while (i != tools->argv_num - 1)
-	{
-		if (!(tools->array_for_sorting[i] < tools->array_for_sorting[i + 1]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	init_stack_b_len(t_toolbox *tools)
-{
-	tools->b.metaljacket = malloc(sizeof(t_bullet) * tools->argv_num);
-	if (!tools->array_for_sorting)
+	tools->a.metaljacket = malloc(sizeof(t_bullet) * tools->argv_num);
+	if (!tools->a.metaljacket)
 		error1();
-	tools->b.jacketlength = 0;
+	tools->a.jacketlength = tools->argv_num;
 }

@@ -2,7 +2,7 @@ PUSH_SWAP	= push_swap
 CHECKER		= checker
 
 
-SRCS = 		main.c main2.c validity_check1.c validity_check2.c	\
+SRCS = 		main.c main2.c validity_check1.c validity_check2.c validity_check3.c	\
 			cmd_push.c cmd_rotate.c cmd_swap.c 			\
 			cmd_rev_rotate.c debug.c sort1.c 			\
 			sort2.c sort5moreops.c sortmore.c					
@@ -13,7 +13,7 @@ LIBFT		=	libft/
 INCLUDES	=	./*.h 
 
 
-BONUS_SRCS	= 	bonus_main.c validity_check1.c validity_check2.c	\
+BONUS_SRCS	= 	bonus_main.c validity_check1.c validity_check2.c validity_check3.c	\
 				cmd_push.c cmd_rotate.c cmd_swap.c 			\
 				cmd_rev_rotate.c debug.c sort1.c 			\
 				sort2.c sort5moreops.c sortmore.c		
@@ -27,7 +27,7 @@ RM = rm -rf
 
 CFLAGS = -MMD -Wall -Wextra -Werror -g
 
-%.o:%.c	#$(PS_HEADER) 
+%.o:%.c	$(PS_HEADER) 
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(PUSH_SWAP)

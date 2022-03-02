@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 23:03:11 by areggie           #+#    #+#             */
-/*   Updated: 2022/02/26 17:48:27 by areggie          ###   ########.fr       */
+/*   Updated: 2022/03/02 12:37:19 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,14 @@ int	charging_a_metaljacket(char **argv, t_toolbox *tools )
 	i = 0;
 	while (i < tools->argv_num)
 	{
-		tools->a.metaljacket[i].bullet_value = ft_atoi(argv[i + 1]);//сохраняем значения в патроны-элементы //(массива патронов - metaljacket типа патрон)
+		tools->a.metaljacket[i].bullet_value = ft_atoi(argv[i + 1]);
 		i++;
-		// printf("inside = %d ", i);
 	}
-	tools->array_for_sorting = malloc(sizeof(int) * tools->argv_num);//cоздание массива- магазина структур-патронов под количество патронов
+	tools->array_for_sorting = malloc(sizeof(int) * tools->argv_num);
 	if (!tools->array_for_sorting)
 		return (0);
-	// printf("outside = %d \n", i);
-	while (i-- > 0) //запись с конца итератором в массив который будет отсортирован
-	{
-		tools->array_for_sorting[i] = tools->a.metaljacket[i].bullet_value; // в массиве запоминаем поданные числа как подали
-		// i;
-		// printf("in = %d ", i);
-	}
-
-	//printing out tools->array_for_sorting
-	// int j = 0;
-	// while (j != tools->argv_num)
-	// {
-	// 	printf("=%d ", tools->array_for_sorting[j]);
-	// 	j++;
-		
-	// } 
-	
+	while (i-- > 0)
+		tools->array_for_sorting[i] = tools->a.metaljacket[i].bullet_value;
 	return (1);
 }
 
@@ -92,10 +76,10 @@ int	check_overflow_notint(char **argv, t_toolbox *tools)
 	char	*str;
 
 	i = 0;
-	while (i++ != tools->argv_num) //прошли по нулю и увеличили итератор на след цикле
+	while (i++ != tools->argv_num)
 	{
-		str = ft_itoa(ft_atoi(argv[i])); //интересная проверка
-		if (ft_strcmp(str, argv[i]) != 0) //если разные значения
+		str = ft_itoa(ft_atoi(argv[i]));
+		if (ft_strcmp(str, argv[i]) != 0)
 		{
 			free(str);
 			return (0);
@@ -105,29 +89,21 @@ int	check_overflow_notint(char **argv, t_toolbox *tools)
 	return (1);
 }
 
-void init_stack_a_len(t_toolbox *tools)
-{
-	tools->a.metaljacket = malloc(sizeof(t_bullet) * tools->argv_num); //cоздание массива- магазина структур-патронов под количество патронов
-	if (!tools->a.metaljacket)
-		error1();
-	tools->a.jacketlength = tools->argv_num;//число патронов в магазине а
-}
-
-void	validate_a_and_charge_metaljacket(int argc, char **argv, t_toolbox *tools)
+void	validate_a_and_charge_metaljacket(int argc, char **argv, \
+t_toolbox *tools)
 {
 	if (!argc_number_checker(argc, tools))
 		error1();
-	if (input_validity_check(argv, tools, argc))	//проверка валидности (числа- не числа, знак, переполнение)
+	if (input_validity_check(argv, tools, argc))
 	{
 		if (!check_overflow_notint(argv, tools))
 			error1();
 		init_stack_a_len(tools);
 		if (!charging_a_metaljacket(argv, tools))
-				error1();
-		if (!checking_repeated_ints(tools)) //проверка повторов
+			error1();
+		if (!checking_repeated_ints(tools))
 			error1();
 	}
 	else
 		error1();
 }
-

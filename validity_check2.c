@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 22:35:23 by areggie           #+#    #+#             */
-/*   Updated: 2022/02/25 22:03:36 by areggie          ###   ########.fr       */
+/*   Updated: 2022/03/02 12:39:12 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,14 @@
 
 void	error1(void)
 {	
-	// sleep(10);//check leaks with invalid cases
 	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
-// void	error0(void)
-// {
-// 	write(2, "Error\n", 6);
-// 	exit(EXIT_SUCCESS);
-// }
-
 int	argc_number_checker(int argc, t_toolbox *tools)
 {
 	if (argc - 1 != tools->argv_num)
-		return(0);
+		return (0);
 	return (1);
 }
 
